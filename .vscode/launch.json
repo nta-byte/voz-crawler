@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "crawl: VOZ STOCK",
+      "type": "python",
+      "request": "launch",
+      "module": "scrapy",
+      "args": ["crawl", "voz_stock", "-o", "comments.json"],
+      "cwd": "${workspaceFolder}/VOZ_crawler",
+      "console": "integratedTerminal"
+    }
+  ]
+}
