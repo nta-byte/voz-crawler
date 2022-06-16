@@ -64,12 +64,12 @@ def generate_item():
 
                 yield newItem
     logger.info('statis: total=%s \n data=%s \n codes=%s' %
-                (len(priorities), priorities, priorities.keys()))
+                (len(priorities), priorities, ' '.join(priorities.keys())))
 
     itemOver50 = list(filter(lambda x: x[1] >= 50, priorities.items()))
 
     logger.info('statis >= 50: total=%s \n data=%s' %
-                (len(itemOver50), list(map(lambda x: x[0], itemOver50))))
+                (len(itemOver50), ' '.join(list(map(lambda x: x[0], itemOver50)))))
 
 
 def filter_stock():
