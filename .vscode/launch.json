@@ -4,7 +4,7 @@
       "name": "Python: Current File",
       "type": "python",
       "request": "launch",
-      "program": "scripts/convert_json_csv.py",
+      "program": "scripts/${fileBasename}",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}"
     },
