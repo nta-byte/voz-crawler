@@ -8,3 +8,20 @@ services:
       - 2345:5432
     environment:
       POSTGRES_PASSWORD: abcd1234
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5555:8080
+  shared:
+    image: nginx
+    ports:
+      - 5551:80
+    volumes:
+      - ./data/:/usr/share/nginx/html
+      - ./.dev/conf.d:/etc/nginx/conf.d
+volumes:
+  pgdata:

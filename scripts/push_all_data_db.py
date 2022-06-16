@@ -32,42 +32,13 @@ def save_db():
 
 def generate_item():
     stockCodes = [
-        'HPG',
-        'POW',
-        'SSI',
-        'MBB',
-        'STB',
-        'VPB',
-        'TCH',
-        'TCB',
-        'VHM',
-        'TPB',
-        'NVL',
-        'HDB',
-        'CTG',
-        'VNM',
-        'MWG',
-        'VRE',
-        'GAS',
-        'SBT',
-        'VIC',
-        'FPT',
-        'BID',
-        'PNJ',
-        'VCB',
-        'REE',
-        'BVH',
-        'KDH',
-        'MSN',
-        'PLX',
-        'VJC',
-        'CTR'
+        'ROS', 'VHM', 'ITA', 'BID', 'HNG', 'FPT', 'APH', 'MSB', 'HPG', 'HAI', 'GEX', 'VNM', 'ART', 'VCG', 'FLC', 'STB', 'VPB', 'VRE', 'AAA', 'ASM', 'BSR', 'KLF', 'MBB', 'TCB', 'HAG', 'VIC', 'BCG', 'DXG', 'CTG', 'APS', 'SSI', 'TPB', 'POW', 'HVN'
     ]
     priorities = {}
     num_completed = 0
     maxItemInStock = 50
     for item in df.to_numpy():
-        for stockCode in stockCodes:
+        for stockCode in list(set(stockCodes))[0:30]:
             if stockCode not in priorities.keys():
                 logger.info("new stock: %s " % stockCode)
                 priorities[stockCode] = 0
@@ -92,7 +63,13 @@ def generate_item():
                                 num_completed)
 
                 yield newItem
-    logger.info('statis: %s' % priorities)
+    logger.info('statis: total=%s \n data=%s \n codes=%s' %
+                (len(priorities), priorities, priorities.keys()))
+
+    itemOver50 = list(filter(lambda x: x[1] >= 50, priorities.items()))
+
+    logger.info('statis >= 50: total=%s \n data=%s' %
+                (len(itemOver50), list(map(lambda x: x[0], itemOver50))))
 
 
 def filter_stock():
