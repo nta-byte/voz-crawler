@@ -5,7 +5,7 @@ fromPath=data/$fileName.json
 targetPath=data/comments-all-latest.json
 
 echo "crawling data ..."
-# scrapy crawl voz_stock -o $fromPath
+scrapy crawl voz_stock -o $fromPath
 
 echo "sync raw data"
 cp -r $fromPath $targetPath
