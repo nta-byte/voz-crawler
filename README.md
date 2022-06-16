@@ -1,15 +1,22 @@
+# VOZ crawler
+Clone all comments of Stock channel on VOZ
+
+## Setup ENV
+
 ```properties
-# Install dependencies
-yum –y install python3
-yum –y install python3-pip
-python3 -m venv
+./setupEnv.sh # support Centos
+./crawl.sh # run spider to crawling data
+```
+## Data
+- data/comments.csv
+- data/comments.xlsx
 
-# Active ENV
-source ./venv/bin/activate
-pip install --upgrade pip
+## Configuration
+By default, the script is crawling data from [Stock](https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528) with 30 Codes.
 
-# Install Libs
-pip3 install scrapy
-
-scrapy startproject voz_crawler
+```python
+./spiders/voz_stock.py
+stockCodes=[
+    ...
+]
 ```
