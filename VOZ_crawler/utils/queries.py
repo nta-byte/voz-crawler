@@ -42,9 +42,9 @@ select count(*) from {TableVOZStockComment}
 '''
 
 QueryGetStockInfo = f'''
-select tc.stock, rc.* from {TableVOZStockComment} tc 
+select tc.stock, rc.topic, rc.content, rc.time from {TableVOZStockComment} tc 
 inner join {TableVOZRawComment} rc on rc.id = tc.voz_rawcomment
 where tc.stock=\'%s\'
 order by rc.time desc
-limit 30
+limit 50
 '''
