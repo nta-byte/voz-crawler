@@ -9,8 +9,8 @@ import scrapy
 class VozCrawlerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    Code = scrapy.Field()
+    Id = scrapy.Field()
+    Author = scrapy.Field()
     Time = scrapy.Field()
     Topic = scrapy.Field()
     Content = scrapy.Field()
-    pass

@@ -4,6 +4,8 @@ import scrapy
 from VOZ_crawler.items import VozCrawlerItem
 import logging
 
+from VOZ_crawler.utils.pypg import PYPG
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s',
@@ -25,6 +27,7 @@ class VozStockSpider(scrapy.Spider):
         'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528']
 
     first_time = True
+    client = PYPG()
 
     def parse(self, response):
         if self.first_time:
@@ -42,12 +45,13 @@ class VozStockSpider(scrapy.Spider):
                 item['Topic'] = comment.xpath(
                     './/div[contains(@class, "message-userContent")]/article/div/blockquote/div[@class="bbCodeBlock-content"]/div/text()').get()
                 item['Time'] = comment.xpath('.//time/@datetime').get()
+                item['Id'] = comment.xpath('.//@data-content').get()
+                item['Author'] = comment.xpath('.//@data-author').get()
                 yield item
 
             next_page_url = response.xpath(
                 '//a[contains(@class, "pageNav-jump--prev")]/@href').get()
-            if next_page_url is not None:
+            if next_page_url is not None and self.client.verify_link(next_page_url):
                 yield scrapy.Request(response.urljoin(next_page_url))
             else:
-                logger.info("stats: %s" % self.priorities)
                 print("DONE")

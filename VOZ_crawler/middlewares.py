@@ -3,10 +3,16 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import pandas
 from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
+from VOZ_crawler.utils.constants import StockCodes, TableVOZStockComment
+
+from VOZ_crawler.utils.pypg import PYPG
+from VOZ_crawler.utils.queries import QueryGetStockInfo
+from VOZ_crawler.utils.stock_item import StockItem
 
 
 class VozCrawlerSpiderMiddleware:
@@ -101,3 +107,36 @@ class VozCrawlerDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class VozCrawlerCompleteMiddleware:
+    # Not all methods need to be defined. If a method is not defined,
+    # scrapy acts as if the downloader middleware does not modify the
+    # passed objects.
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # This method is used by Scrapy to create your spiders.
+        s = cls()
+        crawler.signals.connect(
+            s.spider_end, signal=signals.stats_spider_closed)
+        return s
+
+    def spider_end(self, spider):
+        spider.logger.info('Spider closed: %s' % spider.name)
+        # generate new data for stock comment
+        client = PYPG()
+        comments = client.get_all_rawcomment()
+        for item in StockItem().generate_items(comments, StockCodes):
+            client.voz_stockcomment_insert(item)
+
+        topStocks = client.get_top_stock()
+        array = []
+        for stock in topStocks:
+            rs = client.query(QueryGetStockInfo % stock[0]).fetchall()
+            array += rs
+        df2 = pandas.DataFrame.from_records(array)
+        df2.to_csv(r"data/comments.csv",
+                   index=None, encoding='utf-8')
+        df2.to_excel(r"data/comments.xlsx", index=None,
+                     encoding='utf-8', sheet_name='VOZ')
