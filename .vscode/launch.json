@@ -1,10 +1,18 @@
 {
   "configurations": [
     {
-      "name": "Python: Current File",
+      "name": "Run script",
       "type": "python",
       "request": "launch",
       "program": "scripts/${fileBasename}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${fileBasename}",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}"
     },

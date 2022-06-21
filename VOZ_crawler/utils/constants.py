@@ -103,5 +103,8 @@ StockCodes = ["MSN",
               "PGV",
               "SD4"]
 
-TableVOZStockComment = 'voz_stockcomment'
+TableVOZStockComment = 'voz_stock_mapping'
 TableVOZRawComment = 'voz_rawcomment'
+TableVOZLink = 'voz_link'
+
+DB_CONNECTION = 'postgresql://postgres:abcd1234@0.0.0.0:2345/postgres'
