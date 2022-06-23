@@ -32,10 +32,6 @@ class VozCrawlerCompleteMiddleware:
             spider.logger.info('Spider closed: %s' % spider.name)
             if spider.status == 'error':
                 return False
-
-            # generate new data for stock comment
-            spider.generate_stock_data()
-
             # done spider
             spider.spider_done()
 

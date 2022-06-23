@@ -8,7 +8,7 @@ class StockItemGenerator:
     def generate_items_from_comments(self, data, stockCodes):
         for item in data:
             for stockCode in list(set(stockCodes)):
-                regText = '(%s$|%s\s)' % (stockCode, stockCode)
+                regText = '(\s%s$|\s%s\s)' % (stockCode, stockCode)
                 content = item.content
                 voz_commentid = item.id
                 matched = re.search(regText, content, re.I)

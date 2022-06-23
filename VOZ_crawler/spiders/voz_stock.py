@@ -69,7 +69,9 @@ class VozStockSpider(scrapy.Spider):
 
     def spider_done(self):
         self.__commit_spider_runner_done()
-        self.__generate_statis()
+        # generate new data for stock comment
+        self.__generate_stock_data(self.spiderRunner.id)
+        self.__generate_statis(self.spiderRunner.id)
         self.__generate_report()
         self.status = 'end'
 
@@ -115,14 +117,14 @@ class VozStockSpider(scrapy.Spider):
         self.session.execute(sql)
         self.session.commit()
 
-    def generate_stock_data(self):
+    def __generate_stock_data(self, spider_id):
         '''
         generate stock data from rawcomment
         Should run this script after spider done
         '''
         self.logger.info("start generate stock data")
         comments = self.session.query(VOZRawComment).filter_by(
-            spider_id=self.spiderRunner.id).all()
+            spider_id=spider_id).all()
 
         for item in StockItemGenerator().generate_items_from_comments(comments, StockCodes):
             self.add_voz_stock(item)
@@ -145,9 +147,8 @@ class VozStockSpider(scrapy.Spider):
         self.session.add(self.spiderRunner)
         self.session.commit()
 
-    def __generate_statis(self):
+    def __generate_statis(self, spider_id):
         # generate general stats
-        spider_id = self.__get_spider_id()
         num_rawcomment = self.session.query(func.count(VOZRawComment.id)).filter(
             VOZRawComment.spider_id == spider_id).first()[0]
 
@@ -182,11 +183,12 @@ class VozStockSpider(scrapy.Spider):
             data = self.session.query(VOZStockMapping).filter(
                 VOZStockMapping.stock == stock.stock).order_by(VOZStockMapping.created_at).limit(50).all()
             df = pandas.DataFrame(
-                [tuple([x.stock, x.voz_comment.topic, x.voz_comment.content,
+                [tuple([x.voz_comment.topic, x.voz_comment.content,
                        x.voz_comment.time]) for x in data],
-                columns=['Stock', 'Topic', 'Content', 'Time']
+                columns=['Topic', 'Content', 'Time']
             )
-            df.to_excel(writer1, sheet_name=stock.stock)
+
+            df.to_excel(writer1, sheet_name=stock.stock,)
             df.to_excel(writer2, sheet_name=stock.stock)
         writer1.close()
         writer2.close()
