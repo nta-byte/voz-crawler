@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import Column, DateTime, ForeignKey, ForeignKeyConstraint, Integer, String, create_engine
 from sqlalchemy.dialects.postgresql import JSONB
 
-from VOZ_crawler.utils.model import Base
+from crawler.utils.model import Base
 
 
 class VOZStats(Base):

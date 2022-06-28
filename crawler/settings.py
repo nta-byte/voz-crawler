@@ -1,4 +1,4 @@
-# Scrapy settings for VOZ_crawler project
+# Scrapy settings for crawler project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'VOZ_crawler'
+BOT_NAME = 'crawler'
 
-SPIDER_MODULES = ['VOZ_crawler.spiders']
-NEWSPIDER_MODULE = 'VOZ_crawler.spiders'
+SPIDER_MODULES = ['crawler.spiders']
+NEWSPIDER_MODULE = 'crawler.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'VOZ_crawler (+https://voz.vn)'
+USER_AGENT = 'crawler (+https://voz.vn)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'VOZ_crawler.middlewares.VozCrawlerCompleteMiddleware': 543,
+    'crawler.middlewares.VozCrawlerCompleteMiddleware': 543,
 }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'VOZ_crawler.middlewares.VozCrawlerDownloaderMiddleware': 543,
+#    'crawler.middlewares.VozCrawlerDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ SPIDER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'VOZ_crawler.pipelines.VozCrawlerPipeline': 10,
+    'crawler.pipelines.VozCrawlerPipeline': 10,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

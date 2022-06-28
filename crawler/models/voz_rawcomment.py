@@ -1,15 +1,15 @@
 from datetime import datetime
 from sqlalchemy import Column, DateTime, ForeignKey, ForeignKeyConstraint, Integer, String, create_engine
-from sqlalchemy.dialects.postgresql import JSONB
-
-from VOZ_crawler.utils.model import Base
+from crawler.utils.model import Base
 
 
-class VOZStockStats(Base):
-    __tablename__ = 'voz_stock_stats'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    stock = Column(String, nullable=False, unique=True)
-    num = Column(Integer, nullable=False)
+class VOZRawComment(Base):
+    __tablename__ = 'voz_rawcomment'
+    id = Column(String, primary_key=True)
+    time = Column(DateTime, nullable=False)
+    author = Column(String)
+    topic = Column(String)
+    content = Column(String)
     spider_id = Column(Integer, ForeignKey(
         'voz_spider.id', ondelete='cascade'), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)

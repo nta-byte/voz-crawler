@@ -4,8 +4,8 @@ Clone all comments of Stock channel on VOZ
 ## Setup ENV
 
 ```properties
-./setupEnv.sh # support Centos
-./crawl.sh # run spider to crawling data
+./scripts/setupEnv.sh # support Centos
+./scripts/crawl.sh # run spider to crawling data
 ```
 ## Data
 - data/comments.csv

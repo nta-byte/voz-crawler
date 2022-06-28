@@ -4,18 +4,18 @@ import scrapy
 from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from VOZ_crawler.items import VozCrawlerItem
-from VOZ_crawler.models.voz_rawcomment import VOZRawComment
-from VOZ_crawler.models.voz_stats import VOZStats
-from VOZ_crawler.models.voz_stock_mapping import VOZStockMapping
-from VOZ_crawler.models.voz_stock_stats import VOZStockStats
-from VOZ_crawler.utils.constants import StockCodes
+from crawler.items import VozCrawlerItem
+from crawler.models.voz_rawcomment import VOZRawComment
+from crawler.models.voz_stats import VOZStats
+from crawler.models.voz_stock_mapping import VOZStockMapping
+from crawler.models.voz_stock_stats import VOZStockStats
+from crawler.utils.constants import StockCodes
 
-from VOZ_crawler.utils.logger import get_logger
+from crawler.utils.logger import get_logger
 
-from VOZ_crawler.utils.session import create_session
-from VOZ_crawler.models import VOZLink, VOZSprider
-from VOZ_crawler.utils.stock_item import StockItemGenerator
+from crawler.utils.session import create_session
+from crawler.models import VOZLink, VOZSprider
+from crawler.utils.stock_item import StockItemGenerator
 
 logger = get_logger('voz_stock')
 
