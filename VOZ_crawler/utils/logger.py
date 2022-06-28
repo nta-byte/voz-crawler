@@ -4,7 +4,6 @@ import sys
 
 def get_logger(name='log'):
     logger = logging.getLogger()
-
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s',
                                   '%m-%d-%Y %H:%M:%S')

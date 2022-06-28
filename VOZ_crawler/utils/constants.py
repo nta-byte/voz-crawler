@@ -108,3 +108,5 @@ TableVOZRawComment = 'voz_rawcomment'
 TableVOZLink = 'voz_link'
 
 DB_CONNECTION = 'postgresql://postgres:abcd1234@0.0.0.0:2345/postgres'
+
+MAX_STOCKMAPPING_INSERT = 1000
