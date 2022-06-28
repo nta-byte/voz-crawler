@@ -95,9 +95,9 @@ class StatisStock:
         stockStats = self.session.query(VOZStockStats).order_by(
             VOZStockStats.updated_at).filter(VOZStockStats.num >= 50).all()
         writer1 = pandas.ExcelWriter(
-            f"data/voz_data-latest.xlsx")
+            f"crawler/data/voz_data-latest.xlsx")
         writer2 = pandas.ExcelWriter(
-            f"data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
+            f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
         for stock in stockStats:
             data = self.session.query(VOZStockMapping).filter(
                 VOZStockMapping.stock == stock.stock).order_by(VOZStockMapping.created_at).limit(50).all()

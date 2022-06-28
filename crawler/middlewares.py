@@ -38,18 +38,3 @@ class VozCrawlerCompleteMiddleware:
         except Exception as e:
             print(e)
             spider.spider_error_rollback(reason=str(e))
-
-        # topStocks = client.get_top_stock()
-        # array = []
-        # for stock in topStocks:
-        #     rs = client.query(QueryGetStockInfo % stock[0]).fetchall()
-        #     array += rs
-
-        # # call done action
-
-        # # generate_csv
-        # df2 = pandas.DataFrame.from_records(array)
-        # df2.to_csv(r"data/comments.csv",
-        #            index=None, encoding='utf-8')
-        # df2.to_excel(r"data/comments.xlsx", index=None,
-        #              encoding='utf-8', sheet_name='VOZ')
