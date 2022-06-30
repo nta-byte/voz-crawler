@@ -48,19 +48,19 @@ const StockItem: React.FC<{
       </div>
       <div className="border-r-2 p-5 basis-1/6">
         <div className="text-xs text-gray-500">Suggest</div>
-        <div className="font-bold text-lg flex justify-end items-end flex-col">
-          {data.hotTrend && (
-            <div className="relative w-3 h-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            </div>
-          )}
-          <span
-            className={`text-xs font-semibold mr-2 px-2.5 py-0.5 rounded ${suggestWraperGenerete(
-              data.suggest
-            )}`}
-          >
-            {data.suggest.toLocaleUpperCase()}
-          </span>
+        <div className="font-bold text-lg flex">
+          <div className="relative w-5">
+            {data.hotTrend && (
+              <span className="animate-ping absolute w-2 h-2 left-10 rounded-full bg-red-400 opacity-75"></span>
+            )}
+            <span
+              className={`text-xs font-semibold px-2.5 py-0.5 rounded ${suggestWraperGenerete(
+                data.suggest
+              )}`}
+            >
+              {data.suggest.toLocaleUpperCase()}
+            </span>
+          </div>
         </div>
       </div>
     </div>
