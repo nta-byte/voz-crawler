@@ -20,4 +20,5 @@ class StockItemGenerator:
                     newItem = {}
                     newItem['stock'] = stockCode
                     newItem['voz_commentid'] = voz_commentid
+                    newItem['time'] = item.time
                     yield newItem

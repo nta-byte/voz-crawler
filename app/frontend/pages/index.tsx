@@ -2,15 +2,18 @@ import type { NextPage } from "next";
 import LayoutDefault from "../components/Layout/LayoutDetault";
 import SearchBox from "../components/SeachBox";
 import StockItem from "../components/StockItem";
-import { StatsStockType } from "../constants";
-import { generateStatsStock } from "../libs/faker";
+import { StatsStockType } from "shared/dist/types";
+import { generateStatsStock } from "shared/dist/libs/faker";
 import React from "react";
+import { getStatisStock } from "../libs/client";
 
 const Home: NextPage = () => {
   const [statsStocks, setStatsStocks] = React.useState<StatsStockType[]>([]);
   const defaultDataStock = generateStatsStock();
   React.useEffect(() => {
-    setStatsStocks(defaultDataStock);
+    getStatisStock().then(async (rs: any) => {
+      setStatsStocks(await rs.json());
+    });
   }, []);
 
   const handleFilterStocks = (e: any) => {

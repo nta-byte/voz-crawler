@@ -15,4 +15,5 @@ class VOZStockMapping(Base):
         'voz_rawcomment.id', ondelete='cascade'), nullable=False, unique=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
+    time = Column(DateTime)
     voz_comment = relationship(VOZRawComment)

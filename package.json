@@ -7,11 +7,10 @@
   "author": "Kcc <kcc851102@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "fe:start": "yarn workspace frontend dev"
+    "start:fe": "yarn workspace frontend dev",
+    "start:be": "yarn workspace backend dev"
   },
   "workspaces": [
-    "app/frontend",
-    "app/backend",
-    "app/shared"
+    "app/*"
   ]
 }

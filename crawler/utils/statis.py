@@ -41,7 +41,7 @@ class StatisStock:
                 item['spider_id'] = spider.id
                 list.append(item)
                 if len(list) >= MAX_STOCKMAPPING_INSERT:
-                    self.__add_stockmapping(list, spider)
+                    self.__add_stockmapping(list)
                     list = []
                 idx += 1
 
