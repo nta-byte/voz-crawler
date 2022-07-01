@@ -51,7 +51,7 @@ export const Service = {
     const data: any = await query
       .clone()
       .orderBy("time", "desc")
-      .limit(20)
+      .limit(30)
       .withGraphFetched("comment(sortByTime)")
       .modifiers({
         sortByTime: (bulder: QueryBuilder<RawComment>) => {
