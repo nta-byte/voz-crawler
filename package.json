@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start:fe": "yarn workspace frontend dev",
-    "start:be": "tsc && yarn workspace backend dev",
+    "start:be": "yarn workspace backend dev",
     "build:shared": "yarn workspace shared build"
   },
   "workspaces": [
