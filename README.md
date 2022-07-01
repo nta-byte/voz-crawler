@@ -9,6 +9,12 @@ location:
 ```
 # run at root project
 
+## up services
+docker-compose up -d 
+
+# generate db
+./scripts/clone.sh
+
 yarn install
 yarn build:shared 
 
