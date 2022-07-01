@@ -100,7 +100,7 @@ class StatisStock:
             f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
         for stock in stockStats:
             data = self.session.query(VOZStockMapping).filter(
-                VOZStockMapping.stock == stock.stock).order_by(VOZStockMapping.created_at).limit(50).all()
+                VOZStockMapping.stock == stock.stock).order_by(VOZStockMapping.time).limit(50).all()
             df = pandas.DataFrame(
                 [tuple([x.voz_comment.topic, x.voz_comment.content,
                         x.voz_comment.time]) for x in data],
