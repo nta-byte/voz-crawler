@@ -5,6 +5,6 @@ export const PGConnection = {
     port: 2345,
     user: "postgres",
     password: "abcd1234",
-    database: "postgres",
+    database: "postgress",
   },
 };
