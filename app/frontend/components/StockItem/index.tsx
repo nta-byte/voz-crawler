@@ -1,5 +1,5 @@
 import React from "react";
-import { StatsStockType, StockSuggestType } from "../../constants";
+import { StatsStockType, StockSuggestType } from "shared/dist/types";
 
 const StockItem: React.FC<{
   data: StatsStockType;
@@ -21,7 +21,7 @@ const StockItem: React.FC<{
   };
 
   return (
-    <div className="flex border justify-between w-full">
+    <div className="flex border justify-between w-full hover:bg-slate-200 hover:font-bold">
       <div className="border-r-2  p-5 basis-2/6">
         <div className="text-xs text-gray-500">
           Date updated: {data.dateUpdated}

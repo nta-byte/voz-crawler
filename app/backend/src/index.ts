@@ -17,7 +17,8 @@ app.use(
   })
 );
 
-app.get(Service.path, Service.get);
+app.get(API_PATHS.statisStock, Service.getStatisStock);
+app.get(API_PATHS.latestStock, Service.getNewStocks);
 
 // start the express server
 app.listen(port, () => {
