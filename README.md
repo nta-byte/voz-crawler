@@ -1,7 +1,7 @@
 # VOZ crawler
 Clone all comments of Stock channel on VOZ
 
-## FE AND BE
+## Packages (includes frontend and backend)
 location: 
 - frontend: app/frontend
 - backend: app/backend
@@ -9,29 +9,43 @@ location:
 ```
 # run at root project
 
-## up services
+## up the related services
 docker-compose up -d 
 
-# generate db
+# generate db (do this at the first time)
 ./scripts/clone.sh
 
+# install dependencies
 yarn install
+
+# build common libs
 yarn build:shared 
 
-yarn start:fe # run frontend service
+# start frontend service
+yarn start:fe
+
+# start backend service
 yarn start:be # run backend server
 ```
 
-## CRAWLER MODULE
+## Crawler service
 ### Setup ENV
 
 ```properties
-./scripts/setupEnv.sh # support Centos
-./scripts/crawl.sh # run spider to crawling data
+# prepare env for crawl job (just support centos env)
+./scripts/setupEnv.sh
+
+# crawling data
+./scripts/crawl.sh
 ```
+
 ### Data
 - data/comments.csv
 - data/comments.xlsx
+
+### Database
+- location: ./crawler/database/*
+- update database backup: ./script/dump.sh
 
 ### Configuration
 By default, the script is crawling data from [Stock](https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528) with 30 Codes.
