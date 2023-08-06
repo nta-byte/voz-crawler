@@ -10,7 +10,7 @@ RUN apt update \
     && apt install -y wait-for-it
 
 
-
+RUN pip install --upgrade pip
 COPY ./ ./
 
 #RUN chmod +x ./entrypoint.sh
