@@ -9,5 +9,4 @@ pip install scrapy
 pip install pandas
 pip install sqlalchemy
 pip install openpyxl
-pip install psycopg2
 pip install psycopg2-binary==2.8.6
