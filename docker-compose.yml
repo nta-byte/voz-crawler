@@ -24,8 +24,9 @@ services:
     container_name: crawler_worker
     ports:
       - '5000:5000'
-#    links:
-#      - elasticsearch
+    links:
+      - vozdb
+      - shared
     environment:
       - PG_USER=postgres
       - PG_PASSWORD=abcd1234
