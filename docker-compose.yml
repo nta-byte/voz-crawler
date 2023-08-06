@@ -38,5 +38,7 @@ services:
       - ELASTICSEARCH_USER=elastic
       - ELASTICSEARCH_PASSWORD=changeme
       - REDIS_HOST=localhost
+    volumes:
+      - ./:/usr/src/app/
 volumes:
   pgdata:
