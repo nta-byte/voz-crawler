@@ -17,5 +17,25 @@ services:
     volumes:
       - ./data/:/usr/share/nginx/html
       - ./.dev/conf.d:/etc/nginx/conf.d
+
+  worker:
+    build:
+      context: .
+    container_name: crawler_worker
+    ports:
+      - '5000:5000'
+#    links:
+#      - elasticsearch
+    environment:
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_DATABASE=postgres
+      - PG_HOST=0.0.0.0
+      - PG_PORT=5432
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - ELASTICSEARCH_USER=elastic
+      - ELASTICSEARCH_PASSWORD=changeme
+      - REDIS_HOST=localhost
 volumes:
   pgdata:
