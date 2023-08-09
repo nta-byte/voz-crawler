@@ -19,7 +19,7 @@ COPY ./ ./
 RUN pip install -r requirements.txt
 
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["bash", "./entrypoint.sh"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["bash", "./entrypoint.sh"]
 
 
