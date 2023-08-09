@@ -18,7 +18,6 @@ COPY ./ ./
 
 RUN pip install -r requirements.txt
 
-RUN yarn install
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 #ENTRYPOINT ["bash", "./entrypoint.sh"]
