@@ -57,9 +57,9 @@ class VozStockSpider(scrapy.Spider):
     def process_item(self, comment):
         item = VozCrawlerItem()
         item['content'] = comment.xpath(
-            './/div[contains(@class, "message message--post")]/article/div/text()').get()
+            './/div[contains(@class, "message-userContent")]/article/div/div/text()').get()
         item['topic'] = comment.xpath(
-            './/div[contains(@class, "message message--post")]/article/div/blockquote/div[@class="bbCodeBlock-content"]/div/text()').get()
+            './/div[contains(@class, "message-userContent")]/article/div/blockquote/div[@class="bbCodeBlock-content"]/div/text()').get()
         item['time'] = comment.xpath('.//time/@datetime').get()
         item['id'] = comment.xpath('.//@data-content').get()
         item['author'] = comment.xpath('.//@data-author').get()
