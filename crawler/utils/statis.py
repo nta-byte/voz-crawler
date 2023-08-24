@@ -94,10 +94,12 @@ class StatisStock:
     def __generate_report(self):
         stockStats = self.session.query(VOZStockStats).order_by(
             VOZStockStats.updated_at).filter(VOZStockStats.num >= 50).all()
-        writer1 = pandas.ExcelWriter(
-            f"crawler/data/voz_data-latest.xlsx")
-        writer2 = pandas.ExcelWriter(
-            f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
+        file_name1 = f"crawler/data/voz_data-latest.csv"
+        file_name2 = f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.csv"
+        # writer1 = pandas.ExcelWriter(
+        #     f"crawler/data/voz_data-latest.xlsx")
+        # writer2 = pandas.ExcelWriter(
+        #     f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
         start_row = 1
         for stock in stockStats:
             data = self.session.query(VOZStockMapping).filter(
@@ -107,9 +109,12 @@ class StatisStock:
                         x.voz_comment.time]) for x in data],
                 columns=['Topic', 'Content', 'Time']
             )
-            df.to_excel(writer1, sheet_name=stock.stock,)
-            df.to_excel(writer2, sheet_name=stock.stock)
+            df.to_csv(file_name1, mode='a', index=False, header=False)
+            df.to_csv(file_name2, mode='a', index=False, header=False)
+            # df.to_excel(writer1, sheet_name=stock.stock,)
+            # df.to_excel(writer2, sheet_name=stock.stock)
+
         # writer1.close()
         # writer2.close()
-        writer1.save()
-        writer2.save()
+        # writer1.save()
+        # writer2.save()
