@@ -45,7 +45,6 @@ class VozStockSpider(scrapy.Spider):
             comments = scrapy.Selector(response).xpath(
                 '//article[contains(@class, "js-post")]')
             for comment in comments[::-1]:
-                print(comment)
                 yield self.process_item(comment)
 
             next_page_url = response.xpath(
