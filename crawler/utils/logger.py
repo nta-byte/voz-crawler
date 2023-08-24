@@ -9,7 +9,7 @@ def get_logger(name='log'):
                                   '%m-%d-%Y %H:%M:%S')
 
     stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setLevel(logging.DEBUG)
+    stdout_handler.setLevel(logging.ERROR)
     stdout_handler.setFormatter(formatter)
 
     file_handler = logging.FileHandler('logs/'+name+'.log')
