@@ -33,7 +33,7 @@ services:
       - PG_PASSWORD=abcd1234
       - PG_DATABASE=postgres
       - PG_HOST=vozdb
-      - PG_PORT=5432
+      - PG_PORT=5423
       - NGINX_HOST=shared
       - NGINX_PORT=80
     volumes:
