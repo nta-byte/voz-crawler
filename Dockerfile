@@ -10,8 +10,8 @@ RUN apt update \
     && apt install -y wait-for-it \
     && apt install -y libpq-dev \
     && apt install -y gcc \
-    && apt install build-essential checkinstall libffi-dev \
-    && apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+    && apt install -y build-essential checkinstall libffi-dev \
+    && apt install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 
 
