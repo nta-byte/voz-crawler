@@ -7,7 +7,8 @@ RUN apt update \
     && apt install -y jq \
     && apt install -y vim \
     && apt install -y telnet \
-    && apt install -y wait-for-it
+    && apt install -y wait-for-it \
+    && apt install -y libpq-dev
 
 RUN pip install --upgrade pip
 COPY ./ ./
