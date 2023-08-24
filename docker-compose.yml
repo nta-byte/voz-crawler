@@ -26,6 +26,7 @@ services:
     container_name: crawler_worker
     ports:
       - '5001:5000'
+
     links:
       - vozdb
     environment:

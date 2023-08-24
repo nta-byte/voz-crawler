@@ -1,3 +1,5 @@
+import os
+
 StockCodes = ["MSN",
               "HAI",
               "NVL",
@@ -106,7 +108,10 @@ StockCodes = ["MSN",
 TableVOZStockComment = 'voz_stock_mapping'
 TableVOZRawComment = 'voz_rawcomment'
 TableVOZLink = 'voz_link'
-
-DB_CONNECTION = 'postgresql://postgres:abcd1234@localhost:5423/postgress'
+PG_USER = os.environ['PG_USER']
+PG_PASSWORD = os.environ['PG_PASSWORD']
+PG_PORT = os.environ['PG_PORT']
+PG_HOST = os.environ['PG_HOST']
+DB_CONNECTION = f'postgresql://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/postgress'
 
 MAX_STOCKMAPPING_INSERT = 1000
