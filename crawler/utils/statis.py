@@ -98,6 +98,7 @@ class StatisStock:
             f"crawler/data/voz_data-latest.xlsx")
         writer2 = pandas.ExcelWriter(
             f"crawler/data/voz_data-crawl-{datetime.utcnow().isoformat()}.xlsx")
+        start_row = 1
         for stock in stockStats:
             data = self.session.query(VOZStockMapping).filter(
                 VOZStockMapping.stock == stock.stock).order_by(VOZStockMapping.time).limit(50).all()
@@ -108,5 +109,7 @@ class StatisStock:
             )
             df.to_excel(writer1, sheet_name=stock.stock,)
             df.to_excel(writer2, sheet_name=stock.stock)
-        writer1.close()
-        writer2.close()
+        # writer1.close()
+        # writer2.close()
+        writer1.save()
+        writer2.save()
