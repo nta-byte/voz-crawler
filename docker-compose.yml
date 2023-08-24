@@ -5,27 +5,27 @@ services:
     image: postgres
     restart: always
     ports:
-      - "5432:5432"
+      - "5423:5432"
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: abcd1234
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-  shared:
-    image: nginx
-    ports:
-      - "5551:80"
-    volumes:
-      - ./data/:/usr/share/nginx/html
-      - ./.dev/conf.d:/etc/nginx/conf.d
+#  shared:
+#    image: nginx
+#    ports:
+#      - "5551:80"
+#    volumes:
+#      - ./data/:/usr/share/nginx/html
+#      - ./.dev/conf.d:/etc/nginx/conf.d
 
   worker:
     build:
       context: .
     container_name: crawler_worker
     ports:
-      - '5000:5000'
+      - '5001:5000'
     links:
       - vozdb
       - shared
