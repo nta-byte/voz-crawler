@@ -7,9 +7,7 @@ RUN apt update \
     && apt install -y jq \
     && apt install -y vim \
     && apt install -y telnet \
-    && apt install -y wait-for-it \
-    && apt install -y --no-install-recommends yarn
-
+    && apt install -y wait-for-it
 
 RUN pip install --upgrade pip
 COPY ./ ./
