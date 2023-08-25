@@ -21,7 +21,7 @@ logger = get_logger('voz_stock')
 
 
 class VozStockSpider(scrapy.Spider):
-    name = 'voz_stock'
+    name = 'f319_stock'
     allowed_domains = ['f319.com']
     start_urls = [
         'https://f319.com/'
