@@ -24,7 +24,7 @@ class F319StockSpider(scrapy.Spider):
     name = 'f319_stock'
     allowed_domains = ['f319.com']
     start_urls = [
-        'https://f319.com'
+        'https://f319.com',
         'https://f319.com/threads/phan-tich-ky-thuat-ta-chi-chia-se-kien-thuc-ko-spam.13691'
     ]
 
