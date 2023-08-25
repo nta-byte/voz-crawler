@@ -58,11 +58,11 @@ class F319StockSpider(scrapy.Spider):
 
     def process_item(self, comment):
         item = VozCrawlerItem()
-        content = comment.xpath('.//div[contains(@class, "messageContent")]/article//text()').extract()
+        content = comment.xpath('.//div[contains(@class, "messageContent")]/article/blockquote/span/text()').extract()
         _content = [line for line in content if line != "\n"]
         item['content'] = ''.join(_content)
         topic = comment.xpath(
-            './/div[contains(@class, "messageContent")]/article/div/blockquote/div[@class="bbCodeBlock-content"]/div/text()').extract()
+            './/div[contains(@class, "messageContent")]/article/blockquote/b/text()').extract()
         item['topic'] = ''.join([line for line in topic if line != "\n"])
         item['time'] = comment.xpath('.//time/@datetime').get()
         item['id'] = comment.xpath('.//@data-content').get()
