@@ -24,7 +24,9 @@ class VozStockSpider(scrapy.Spider):
     name = 'voz_stock'
     allowed_domains = ['voz.vn']
     start_urls = [
-        'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528']
+        'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528',
+        'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-2023-make-voz-great-again.692703'
+    ]
 
     first_time = True
     session = create_session()
