@@ -112,6 +112,7 @@ PG_USER = os.environ['PG_USER']
 PG_PASSWORD = os.environ['PG_PASSWORD']
 PG_PORT = os.environ['PG_PORT']
 PG_HOST = os.environ['PG_HOST']
-DB_CONNECTION = f'postgresql://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/postgress'
+PG_DATABASE = os.environ['PG_DATABASE']
+DB_CONNECTION = f'postgresql://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}'
 
 MAX_STOCKMAPPING_INSERT = 1000
