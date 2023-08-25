@@ -17,10 +17,10 @@ from crawler.utils.session import create_session
 from crawler.models import VOZLink, VOZSprider
 from crawler.utils.stock_item import StockItemGenerator
 
-logger = get_logger('voz_stock')
+logger = get_logger('f319_stock')
 
 
-class VozStockSpider(scrapy.Spider):
+class F319StockSpider(scrapy.Spider):
     name = 'f319_stock'
     allowed_domains = ['f319.com']
     start_urls = [
