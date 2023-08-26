@@ -40,24 +40,24 @@ class F319StockSpider(scrapy.Spider):
         self.count = 0
         self.__start_new_thread()
 
-    # def parse(self, response):
-    #     if self.first_time:
-    #         self.first_time = False
-    #         newPage = scrapy.Selector(response).xpath(
-    #             '//div[@class="PageNav"]/li[last()]/a/@href').get()
-    #         yield scrapy.Request(response.urljoin(newPage))
-    #     else:
-    #         comments = scrapy.Selector(response).xpath(
-    #             '//li[contains(@class, "message")]')
-    #         for comment in comments[::-1]:
-    #             yield self.process_item(comment)
-    #
-    #         next_page_url = response.xpath(
-    #             '//a[contains(@class, "text")]/@href').get()
-    #         if next_page_url is not None and self.__verify_link(next_page_url):
-    #             yield scrapy.Request(response.urljoin(next_page_url))
-    #         else:
-    #             print("DONE")
+    def parse(self, response):
+        if self.first_time:
+            self.first_time = False
+            newPage = scrapy.Selector(response).xpath(
+                '//div[@class="PageNav"]/li[last()]/a/@href').get()
+            yield scrapy.Request(response.urljoin(newPage))
+        else:
+            comments = scrapy.Selector(response).xpath(
+                '//li[contains(@class, "message")]')
+            for comment in comments[::-1]:
+                yield self.process_item(comment)
+
+            next_page_url = response.xpath(
+                '//a[contains(@class, "text")]/@href').get()
+            if next_page_url is not None and self.__verify_link(next_page_url):
+                yield scrapy.Request(response.urljoin(next_page_url))
+            else:
+                print("DONE")
 
     def process_item(self, comment):
         item = VozCrawlerItem()
