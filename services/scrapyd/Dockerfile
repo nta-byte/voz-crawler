@@ -61,7 +61,7 @@ RUN set -xe \
                                       libxslt1-dev \
                                       python3-dev \
     && rm -rf /var/lib/apt/lists/*
-
+COPY ../.. ./
 COPY ./scrapyd.conf /etc/scrapyd/
 VOLUME /etc/scrapyd/ /var/lib/scrapyd/
 EXPOSE 6800
