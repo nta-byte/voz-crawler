@@ -48,7 +48,7 @@ class F319StockSpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(newPage))
         else:
             comments = scrapy.Selector(response).xpath(
-                '//li[contains(@class, "message")]')
+                '//ol[contains(@class, "messageList")]')
             for comment in comments[::-1]:
                 yield self.process_item(comment)
 
