@@ -1,8 +1,7 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, Integer, String, create_engine
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, DateTime, Integer, String
 
-from crawler.utils.model import Base
+from services.worker.crawler.utils.model import Base
 
 
 class VOZSprider(Base):

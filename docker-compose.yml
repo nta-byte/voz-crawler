@@ -12,17 +12,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
-#  shared:
-#    image: nginx
-#    ports:
-#      - "5551:80"
-#    volumes:
-#      - ./data/:/usr/share/nginx/html
-#      - ./.dev/conf.d:/etc/nginx/conf.d
 
   worker:
     build:
-      context: .
+      context: ./services/worker
     container_name: crawler_worker
     restart: always
     ports:
@@ -37,6 +30,6 @@ services:
       - PG_HOST=vozdb
       - PG_PORT=5432
     volumes:
-      - ./:/usr/src/app/
+      - ./services/worker:/usr/src/app/
 volumes:
   pgdata:

@@ -1,35 +1,26 @@
 from datetime import datetime
-from requests import session
 import scrapy
-from scrapy.spiders import Rule
-from scrapy.linkextractors import LinkExtractor
-from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from crawler.items import VozCrawlerItem
-from crawler.models.voz_rawcomment import VOZRawComment
-from crawler.models.voz_stats import VOZStats
-from crawler.models.voz_stock_mapping import VOZStockMapping
-from crawler.models.voz_stock_stats import VOZStockStats
-from crawler.utils.constants import StockCodes
+from services.worker.crawler.items import VozCrawlerItem
+from services.worker.crawler.models.voz_rawcomment import VOZRawComment
+from services.worker.crawler.models.voz_stock_mapping import VOZStockMapping
 
-from crawler.utils.logger import get_logger
+from services.worker.crawler.utils.logger import get_logger
 
-from crawler.utils.session import create_session
-from crawler.models import VOZLink, VOZSprider
-from crawler.utils.stock_item import StockItemGenerator
+from services.worker.crawler.utils.session import create_session
+from services.worker.crawler.models import VOZLink, VOZSprider
 
-logger = get_logger('f319_stock')
+logger = get_logger('voz_stock')
 
 
-class F319StockSpider(scrapy.Spider):
-    name = 'f319_stock'
-    allowed_domains = ['f319.com']
+class VozStockSpider(scrapy.Spider):
+    name = 'voz_stock'
+    allowed_domains = ['voz.vn']
     start_urls = [
-        # 'https://f319.com',
-        'https://f319.com/threads/phan-tich-ky-thuat-ta-chi-chia-se-kien-thuc-ko-spam.13691'
+        'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-version-2022.464528',
+        'https://voz.vn/t/clb-chung-khoan-chia-se-kinh-nghiem-dau-tu-chung-khoan-2023-make-voz-great-again.692703'
     ]
-    rules = [Rule(LinkExtractor(), callback='process_item', follow=True)]
 
     first_time = True
     session = create_session()
@@ -44,16 +35,16 @@ class F319StockSpider(scrapy.Spider):
         if self.first_time:
             self.first_time = False
             newPage = scrapy.Selector(response).xpath(
-                '//div[@class="PageNav"]/li[last()]/a/@href').get()
+                '//ul[@class="pageNav-main"]/li[last()]/a/@href').get()
             yield scrapy.Request(response.urljoin(newPage))
         else:
             comments = scrapy.Selector(response).xpath(
-                '//ol[contains(@class, "messageList")]')
+                '//article[contains(@class, "js-post")]')
             for comment in comments[::-1]:
                 yield self.process_item(comment)
 
             next_page_url = response.xpath(
-                '//a[contains(@class, "text")]/@href').get()
+                '//a[contains(@class, "pageNav-jump--prev")]/@href').get()
             if next_page_url is not None and self.__verify_link(next_page_url):
                 yield scrapy.Request(response.urljoin(next_page_url))
             else:
@@ -61,14 +52,13 @@ class F319StockSpider(scrapy.Spider):
 
     def process_item(self, comment):
         item = VozCrawlerItem()
-        content = comment.xpath('.//div[contains(@class, "messageContent")]/article/blockquote/span/text()').extract()
-        _content = [line for line in content if line != "\n"]
-        item['content'] = ''.join(_content)
-        topic = comment.xpath(
-            './/div[contains(@class, "messageContent")]/article/blockquote/b/text()').extract()
+        item['content'] = comment.xpath('.//div[contains(@class, "message-userContent")]/article//text()').extract()
+        content = [line for line in item['content'] if line != "\n"]
+        item['content'] = ''.join(content)
+        topic = comment.xpath('.//div[contains(@class, "p-body-header")]//div[contains(@class, "p-title")]//text()').extract()
         item['topic'] = ''.join([line for line in topic if line != "\n"])
-        item['time'] = comment.xpath('.//a[contains(@class, "datePermalink")]/text()').get()
-        item['id'] = comment.xpath('.//@id').get()
+        item['time'] = comment.xpath('.//time/@datetime').get()
+        item['id'] = comment.xpath('.//@data-content').get()
         item['author'] = comment.xpath('.//@data-author').get()
         item['spider_id'] = self.spiderRunner.id
         return item

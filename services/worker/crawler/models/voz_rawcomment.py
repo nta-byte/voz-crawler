@@ -1,6 +1,6 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, ForeignKey, ForeignKeyConstraint, Integer, String, create_engine
-from crawler.utils.model import Base
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from services.worker.crawler.utils.model import Base
 
 
 class VOZRawComment(Base):

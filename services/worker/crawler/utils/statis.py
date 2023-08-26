@@ -1,14 +1,14 @@
 from datetime import datetime
 
 import pandas
-from crawler.models import VOZSprider, VOZRawComment, VOZStockMapping
-from crawler.models.voz_link import VOZLink
-from crawler.models.voz_stats import VOZStats
-from crawler.models.voz_stock_stats import VOZStockStats
-from crawler.utils.constants import MAX_STOCKMAPPING_INSERT, StockCodes
-from crawler.utils.logger import get_logger
-from crawler.utils.session import create_session
-from crawler.utils.stock_item import StockItemGenerator
+from services.worker.crawler.models import VOZSprider, VOZRawComment, VOZStockMapping
+from services.worker.crawler.models.voz_link import VOZLink
+from services.worker.crawler.models.voz_stats import VOZStats
+from services.worker.crawler.models.voz_stock_stats import VOZStockStats
+from services.worker.crawler.utils.constants import MAX_STOCKMAPPING_INSERT, StockCodes
+from services.worker.crawler.utils.logger import get_logger
+from services.worker.crawler.utils.session import create_session
+from services.worker.crawler.utils.stock_item import StockItemGenerator
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy import func
 

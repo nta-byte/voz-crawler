@@ -1,8 +1,8 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, ForeignKey, ForeignKeyConstraint, Integer, String, create_engine
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from crawler.models.voz_rawcomment import VOZRawComment
-from crawler.utils.model import Base
+from services.worker.crawler.models.voz_rawcomment import VOZRawComment
+from services.worker.crawler.utils.model import Base
 
 
 class VOZStockMapping(Base):

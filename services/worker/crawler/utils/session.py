@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from crawler.utils.constants import DB_CONNECTION
+from services.worker.crawler.utils.constants import DB_CONNECTION
 
 
 def create_session():

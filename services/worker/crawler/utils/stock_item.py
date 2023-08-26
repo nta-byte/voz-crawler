@@ -1,6 +1,5 @@
 import re
-from crawler.models.voz_stock_mapping import VOZStockMapping
-from crawler.utils.logger import get_logger
+from services.worker.crawler.utils.logger import get_logger
 logger = get_logger(name='StockItem')
 
 

@@ -16,7 +16,7 @@ RUN apt update \
 
 
 RUN pip install --upgrade pip
-COPY ./ ./
+COPY ../.. ./
 
 #RUN chmod +x ./entrypoint.sh
 

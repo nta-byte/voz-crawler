@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
-from crawler.utils.constants import DB_CONNECTION
+from services.worker.crawler.utils.constants import DB_CONNECTION
 
 Base = declarative_base()
 Engine = create_engine(DB_CONNECTION)
