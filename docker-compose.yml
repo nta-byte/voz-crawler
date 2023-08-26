@@ -27,7 +27,7 @@ services:
       - '5001:5000'
       - '6800:6800'
     links:
-      - vozdb
+      - db
     networks:
       - backend
     environment:
@@ -48,7 +48,7 @@ services:
       - ./scrapyd:/var/lib/scrapyd
     restart: always
     links:
-      - vozdb
+      - db
       - scrapy
     networks:
       - backend
@@ -63,6 +63,10 @@ services:
     volumes:
       - ./services/scrapyrt:/data
     working_dir: /data
+    links:
+      - db
+      - scrapy
+      - scrapyd
     restart: always
     networks:
       - backend
