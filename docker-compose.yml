@@ -39,5 +39,37 @@ services:
     volumes:
       - ./services/scrapy:/usr/src/app/
 
+  scrapyd:
+#    image: easypi/scrapyd
+    build:
+      context: ./services/scrapy
+    ports:
+      - "6800:6800"
+    volumes:
+      - ./data:/var/lib/scrapyd
+      - /usr/local/lib/python3.11/dist-packages
+    restart: unless-stopped
+
+  scrapy:
+#    image: easypi/scrapyd
+    build:
+      context: ./services/scrapy
+    command: bash
+    volumes:
+      - ./services/scrapyd:/code
+    working_dir: /code
+    restart: unless-stopped
+
+  scrapyrt:
+#    image: easypi/scrapyd
+    build:
+      context: ./services/scrapy
+    command: scrapyrt -i 0.0.0.0 -p 9080
+    ports:
+      - "9080:9080"
+    volumes:
+      - ./services/scrapyd:/code
+    working_dir: /code
+    restart: unless-stopped
 volumes:
   pgdata:
