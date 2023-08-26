@@ -23,7 +23,7 @@ COPY ../.. ./
 RUN pip install -r requirements.txt
 
 
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-ENTRYPOINT ["bash", "./entrypoint_scrapyd.sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["bash", "./entrypoint_scrapyd.sh"]
 
 
