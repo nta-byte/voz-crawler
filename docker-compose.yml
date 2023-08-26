@@ -19,7 +19,7 @@ services:
     networks:
       - backend
 
-  scrapy:
+  worker:
     build:
       context: ./services/scrapy
     restart: always
@@ -38,6 +38,18 @@ services:
       - PG_PORT=5432
     volumes:
       - ./services/scrapy:/usr/src/app/
+
+  scrapy:
+    build:
+      context: ./services/scrapyd
+#    image: scrapyd-onbuild
+    command: [ 'tail', '-f', '/dev/null' ]
+    volumes:
+      - ./scrapy:/data
+    working_dir: /data
+    restart: always
+    networks:
+      - backend
 
   scrapyd:
     build:
