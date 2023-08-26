@@ -42,7 +42,7 @@ services:
   scrapyd:
 #    image: easypi/scrapyd
     build:
-      context: ./services/scrapy
+      context: ./services/scrapyd
     ports:
       - "6800:6800"
     volumes:
@@ -53,7 +53,7 @@ services:
   scrapy:
 #    image: easypi/scrapyd
     build:
-      context: ./services/scrapy
+      context: ./services/scrapyd
     command: bash
     volumes:
       - ./services/scrapyd:/code
@@ -63,7 +63,7 @@ services:
   scrapyrt:
 #    image: easypi/scrapyd
     build:
-      context: ./services/scrapy
+      context: ./services/scrapyd
     command: scrapyrt -i 0.0.0.0 -p 9080
     ports:
       - "9080:9080"
