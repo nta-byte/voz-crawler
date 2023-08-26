@@ -13,9 +13,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  worker:
+  scrapy:
     build:
-      context: ./services/worker
+      context: services/scrapy
     container_name: crawler_worker
     restart: always
     ports:
@@ -30,6 +30,6 @@ services:
       - PG_HOST=vozdb
       - PG_PORT=5432
     volumes:
-      - ./services/worker:/usr/src/app/
+      - ./services/scrapy:/usr/src/app/
 volumes:
   pgdata:

@@ -4,14 +4,14 @@ from scrapy.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from services.worker.crawler.items import VozCrawlerItem
-from services.worker.crawler.models.voz_rawcomment import VOZRawComment
-from services.worker.crawler.models.voz_stock_mapping import VOZStockMapping
+from services.scrapy.crawler.items import VozCrawlerItem
+from services.scrapy.crawler.models.voz_rawcomment import VOZRawComment
+from services.scrapy.crawler.models.voz_stock_mapping import VOZStockMapping
 
-from services.worker.crawler.utils.logger import get_logger
+from services.scrapy.crawler.utils.logger import get_logger
 
-from services.worker.crawler.utils.session import create_session
-from services.worker.crawler.models import VOZLink, VOZSprider
+from services.scrapy.crawler.utils.session import create_session
+from services.scrapy.crawler.models import VOZLink, VOZSprider
 
 logger = get_logger('f319_stock')
 

@@ -1,5 +1,5 @@
 import re
-from services.worker.crawler.utils.logger import get_logger
+from services.scrapy.crawler.utils.logger import get_logger
 logger = get_logger(name='StockItem')
 
 

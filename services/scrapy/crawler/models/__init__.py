@@ -1,4 +1,4 @@
-from services.worker.crawler.utils.model import Base, Engine
+from services.scrapy.crawler.utils.model import Base, Engine
 from .voz_spider import VOZSprider
 from .voz_link import VOZLink
 from .voz_rawcomment import VOZRawComment
