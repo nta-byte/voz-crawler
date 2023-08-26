@@ -39,49 +39,5 @@ services:
     volumes:
       - ./services/scrapy:/usr/src/app/
 
-  scrapy:
-    build:
-      context: ./services/scrapyd
-#    image: scrapyd-onbuild
-    command: [ 'tail', '-f', '/dev/null' ]
-    volumes:
-      - ./scrapy:/data
-    working_dir: /data
-    restart: always
-    networks:
-      - backend
-
-  scrapyd:
-    build:
-      context: ./services/scrapyd
-    ports:
-      - "127.0.0.1:6800:6800"
-    volumes:
-      - ./scrapyd:/var/lib/scrapyd
-    restart: always
-    links:
-      - db
-      - scrapy
-    networks:
-      - backend
-
-  scrapyrt:
-    build:
-      context: ./services/scrapyd
-#    image: scrapyd-onbuild
-    command: scrapyrt -i 0.0.0.0 -p 9080
-    ports:
-      - "127.0.0.1:9080:9080"
-    volumes:
-      - ./services/scrapyrt:/data
-    working_dir: /data
-    links:
-      - db
-      - scrapy
-      - scrapyd
-    restart: always
-    networks:
-      - backend
-
 volumes:
   pgdata:
