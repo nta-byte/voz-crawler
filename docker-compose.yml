@@ -19,25 +19,25 @@ services:
     networks:
       - backend
 
-  worker:
-    build:
-      context: ./services/scrapy
-    restart: always
-    ports:
-      - '5001:5000'
-      - '6800:6800'
-    links:
-      - db
-    networks:
-      - backend
-    environment:
-      - PG_USER=${POSTGRES_USER}
-      - PG_PASSWORD=${POSTGRES_PASSWORD}
-      - PG_DATABASE=${POSTGRES_DB}
-      - PG_HOST=db
-      - PG_PORT=5432
-    volumes:
-      - ./services/scrapy:/usr/src/app/
+#  worker:
+#    build:
+#      context: ./services/scrapy
+#    restart: always
+#    ports:
+#      - '5001:5000'
+#      - '6800:6800'
+#    links:
+#      - db
+#    networks:
+#      - backend
+#    environment:
+#      - PG_USER=${POSTGRES_USER}
+#      - PG_PASSWORD=${POSTGRES_PASSWORD}
+#      - PG_DATABASE=${POSTGRES_DB}
+#      - PG_HOST=db
+#      - PG_PORT=5432
+#    volumes:
+#      - ./services/scrapy:/usr/src/app/
 
   scrapyd:
 #    image: easypi/scrapyd
