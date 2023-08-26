@@ -29,7 +29,7 @@ class F319StockSpider(scrapy.Spider):
         # 'https://f319.com',
         'https://f319.com/threads/phan-tich-ky-thuat-ta-chi-chia-se-kien-thuc-ko-spam.13691'
     ]
-    rules = [Rule(LinkExtractor(), callback='parse_item', follow=True)]
+    rules = [Rule(LinkExtractor(), callback='process_item', follow=True)]
 
     first_time = True
     session = create_session()
