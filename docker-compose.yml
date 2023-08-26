@@ -1,7 +1,11 @@
 version: "3.1"
 
+networks:
+  backend:
+    driver: overlay
+
 services:
-  vozdb:
+  db:
     image: postgres
     restart: always
     ports:
@@ -12,24 +16,56 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
 
   scrapy:
     build:
-      context: services/scrapy
-    container_name: crawler_worker
+      context: ./services/scrapy
     restart: always
     ports:
       - '5001:5000'
       - '6800:6800'
     links:
       - vozdb
+    networks:
+      - backend
     environment:
       - PG_USER=${POSTGRES_USER}
       - PG_PASSWORD=${POSTGRES_PASSWORD}
       - PG_DATABASE=${POSTGRES_DB}
-      - PG_HOST=vozdb
+      - PG_HOST=db
       - PG_PORT=5432
     volumes:
       - ./services/scrapy:/usr/src/app/
+
+  scrapyd:
+    build:
+      context: ./services/scrapyd
+    ports:
+      - "127.0.0.1:6800:6800"
+    volumes:
+      - ./scrapyd:/var/lib/scrapyd
+    restart: always
+    links:
+      - vozdb
+      - scrapy
+    networks:
+      - backend
+
+  scrapyrt:
+    build:
+      context: ./services/scrapyd
+#    image: scrapyd-onbuild
+    command: scrapyrt -i 0.0.0.0 -p 9080
+    ports:
+      - "127.0.0.1:9080:9080"
+    volumes:
+      - ./services/scrapyrt:/data
+    working_dir: /data
+    restart: always
+    networks:
+      - backend
+
 volumes:
   pgdata:
